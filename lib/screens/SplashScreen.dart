@@ -1,49 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:myportfolio/screens/LandingPage.dart';
-import 'package:myportfolio/widgets/HeroSection.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    // Simulate a delay (e.g., for loading resources) and navigate to the next screen
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LandingPage()), // Replace with your main screen
-      );
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    // Navigate to LandingPage after 3 seconds with error handling
+    Future.delayed(const Duration(seconds: 3), () {
+      try {
+        Get.offNamed('/home');
+      } catch (e) {
+        Get.snackbar('Navigation Error', 'Failed to load Landing Page: $e');
+      }
+    });
+
     return Scaffold(
-      backgroundColor: Colors.black, // Black background
+      backgroundColor: Colors.black,
       body: Center(
-        child: AnimatedTextKit(
-          animatedTexts: [
-            TypewriterAnimatedText(
-              'Loading',
-              textStyle: const TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.white, // White text color
-              ),
-              speed: const Duration(milliseconds: 100), // Typing speed
-            ),
-          ],
-          totalRepeatCount: 1, // Play animation once
-          pause: const Duration(milliseconds: 500), // Pause after typing
-          onFinished: () {
-            // Optional: Add logic after animation completes (e.g., navigation)
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            double fontSize = constraints.maxWidth < 600 ? 24 : 32;
+            return AnimatedTextKit(
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  'Initializing Portfolio...',
+                  textStyle: GoogleFonts.spaceMono(
+                    fontSize: fontSize,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.greenAccent.withOpacity(0.8),
+                    shadows: [
+                      Shadow(
+                        blurRadius: 10.0,
+                        color: Colors.greenAccent.withOpacity(0.3),
+                        offset: const Offset(0, 0),
+                      ),
+                    ],
+                  ),
+                  speed: const Duration(milliseconds: 100),
+                ),
+              ],
+              totalRepeatCount: 1,
+              pause: const Duration(milliseconds: 500),
+            );
           },
         ),
       ),
