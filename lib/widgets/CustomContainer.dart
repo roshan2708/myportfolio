@@ -1,41 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomContainer extends StatelessWidget {
   const CustomContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.6, // 60% of screen height
-      color: Colors.transparent, // Transparent container
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Dart',
-            style: TextStyle(
-              color: Color.fromRGBO(148, 0, 211, 0.5), // Violet with 50% opacity
-              fontSize: 90,
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double fontSize = constraints.maxWidth < 600 ? 50 : 90;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          height: MediaQuery.of(context).size.height * 0.6,
+          color: Colors.transparent,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Dart',
+                style: GoogleFonts.spaceMono(
+                  color: Colors.cyanAccent.withOpacity(0.5),
+                  fontSize: fontSize,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10.0,
+                      color: Colors.cyanAccent.withOpacity(0.3),
+                      offset: const Offset(0, 0),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Flutter',
+                style: GoogleFonts.spaceMono(
+                  color: Colors.cyanAccent.withOpacity(0.75),
+                  fontSize: fontSize,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10.0,
+                      color: Colors.cyanAccent.withOpacity(0.3),
+                      offset: const Offset(0, 0),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Code',
+                style: GoogleFonts.spaceMono(
+                  color: Colors.cyanAccent,
+                  fontSize: fontSize,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 10.0,
+                      color: Colors.cyanAccent.withOpacity(0.3),
+                      offset: const Offset(0, 0),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 20), // Spacing between texts
-          Text(
-            'Flutter',
-            style: TextStyle(
-              color: Color.fromRGBO(148, 0, 211, 0.75), // Violet with 75% opacity
-              fontSize: 90,
-            ),
-          ),
-          SizedBox(height: 20), // Spacing between texts
-          Text(
-            'Coffee',
-            style: TextStyle(
-              color: Color.fromRGBO(148, 0, 211, 1.0), // Violet with 100% opacity
-              fontSize: 90,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
