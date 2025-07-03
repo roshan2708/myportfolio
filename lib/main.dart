@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:myportfolio/screens/LandingPage.dart';
 import 'package:myportfolio/screens/SplashScreen.dart';
 
@@ -9,13 +10,22 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-    
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const SplashScreen()),
+        GetPage(name: '/home', page: () => const LandingPage()),
+        GetPage(name: '/cv', page: () => const Center(child: Text('CV Page'))), // Placeholder for CV route
+      ],
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.white),
+        ),
+      ),
     );
   }
 }
