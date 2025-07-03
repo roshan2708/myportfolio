@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InfoContainer extends StatelessWidget {
   final List<String> imageLocations;
@@ -14,53 +15,52 @@ class InfoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ensure the lists have the same length
     assert(imageLocations.length == technologies.length,
         'The number of image locations must match the number of technologies');
 
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.3, // 30% of screen width
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      // Use fixed width for horizontal scroll compatibility
+      width: MediaQuery.of(context).size.width < 600 ? 250 : 350,
       decoration: BoxDecoration(
-        color: Colors.transparent, // Transparent background
-        border: Border.all(
-          color: Colors.white, // White border
-          width: 0.4,
-        ),
+        color: Colors.black.withOpacity(0.7),
+        border: Border.all(color: Colors.greenAccent.withOpacity(0.3), width: 0.4),
+        borderRadius: BorderRadius.circular(12),
       ),
-      padding: const EdgeInsets.all(16.0), // Internal padding
+      padding: const EdgeInsets.all(16.0),
       child: Column(
-        mainAxisSize: MainAxisSize.min, // Makes column take minimum height needed
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
+            style: GoogleFonts.spaceMono(
+              color: Colors.greenAccent,
+              fontSize: MediaQuery.of(context).size.width < 600 ? 18 : 20,
               fontWeight: FontWeight.bold,
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.greenAccent.withOpacity(0.3),
+                  offset: const Offset(0, 0),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 16), // Space between title and content
-          // Dynamically generate rows for each image-technology pair
+          const SizedBox(height: 16),
           ...List.generate(
             imageLocations.length,
             (index) => Padding(
-              padding: const EdgeInsets.only(bottom: 8.0), // Corrected to bottom
+              padding: const EdgeInsets.only(bottom: 8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 50,
-                    height: 50,
+                    width: MediaQuery.of(context).size.width < 600 ? 40 : 50,
+                    height: MediaQuery.of(context).size.width < 600 ? 40 : 50,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 1), // Debug border
-                      image: DecorationImage(
-                        image: NetworkImage(imageLocations[index]),
-                        fit: BoxFit.cover,
-                        onError: (exception, stackTrace) {
-                          print('Error loading image ${imageLocations[index]}: $exception');
-                        },
-                      ),
+                      border: Border.all(color: Colors.greenAccent.withOpacity(0.3), width: 1),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Image.network(
                       imageLocations[index],
@@ -70,23 +70,21 @@ class InfoContainer extends StatelessWidget {
                           Icons.error,
                           color: Colors.red,
                           size: 30,
-                        ); // Fallback for failed image load
+                        );
                       },
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        ); // Loading indicator
+                        return const Center(child: CircularProgressIndicator());
                       },
                     ),
                   ),
-                  const SizedBox(width: 12), // Space between image and text
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       technologies[index],
-                      style: const TextStyle(
+                      style: GoogleFonts.spaceMono(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: MediaQuery.of(context).size.width < 600 ? 14 : 16,
                       ),
                     ),
                   ),

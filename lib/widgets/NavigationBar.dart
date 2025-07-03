@@ -1,7 +1,8 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:myportfolio/NavigationController.dart';
 
-// Define a class to keep track of section keys
 class SectionKeys {
   static final GlobalKey homeKey = GlobalKey();
   static final GlobalKey skillsKey = GlobalKey();
@@ -10,109 +11,57 @@ class SectionKeys {
   static final GlobalKey aboutKey = GlobalKey();
 }
 
-class NavigationWidget extends StatefulWidget {
+class NavigationWidget extends StatelessWidget {
   const NavigationWidget({super.key});
 
   @override
-  State<NavigationWidget> createState() => _NavigationWidgetState();
-}
-
-class _NavigationWidgetState extends State<NavigationWidget> {
-  int _selectedIndex = 0; // Track the selected index, default to Home
-
-  // List of navigation items that match your landing page sections
-  final List<NavigationItem> _navItems = [
-    NavigationItem(icon: Icons.home, label: "Home"),
-    NavigationItem(icon: Icons.code, label: "Skills"),
-    NavigationItem(icon: Icons.computer, label: "Technologies"),
-    NavigationItem(icon: Icons.work, label: "Projects"),
-    NavigationItem(icon: Icons.contact_mail, label: "Contact"),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    
-    // Get the right key based on the selected index
-    GlobalKey targetKey;
-    switch (index) {
-      case 0:
-        targetKey = SectionKeys.homeKey;
-        break;
-      case 1:
-        targetKey = SectionKeys.skillsKey;
-        break;
-      case 2:
-        targetKey = SectionKeys.technologiesKey;
-        break;
-      case 3:
-        targetKey = SectionKeys.projectsKey;
-        break;
-      case 4:
-        targetKey = SectionKeys.aboutKey;
-        break;
-      default:
-        targetKey = SectionKeys.homeKey;
-    }
-
-    // Scroll to the target section
-    final context = targetKey.currentContext;
-    if (context != null) {
-      Scrollable.ensureVisible(
-        context,
-        duration: const Duration(milliseconds: 800),
-        curve: Curves.easeInOut,
-        alignment: 0.0,
-      );
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 25),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(25),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.07,
-              width: MediaQuery.of(context).size.width * 0.6,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    spreadRadius: 2,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(_navItems.length, (index) {
-                  return NavigationButton(
-                    icon: _navItems[index].icon,
-                    text: _navItems[index].label,
-                    isSelected: _selectedIndex == index,
-                    onTap: () => _onItemTapped(index),
-                  );
-                }),
+    final NavigationController navController = Get.find();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.07,
+                width: constraints.maxWidth < 600 ? constraints.maxWidth * 0.9 : constraints.maxWidth * 0.6,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.8),
+                  border: Border.all(color: Colors.greenAccent.withOpacity(0.3)),
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.greenAccent.withOpacity(0.2),
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(navController.navItems.length, (index) {
+                    return NavigationButton(
+                      icon: navController.navItems[index].icon,
+                      text: navController.navItems[index].label,
+                      isSelected: navController.selectedIndex.value == index,
+                      onTap: () => navController.onItemTapped(index),
+                    );
+                  }),
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
-// Simple class to hold navigation item data
 class NavigationItem {
   final IconData icon;
   final String label;
@@ -132,21 +81,24 @@ class NavigationButton extends StatelessWidget {
     this.text,
     required this.onTap,
     this.isSelected = false,
-  }) : assert(icon != null || text != null, "Either icon or text must be provided!");
+  });
 
   @override
   Widget build(BuildContext context) {
-    // Dark violet color for selected items, white for unselected
-    final Color selectedColor = const Color.fromARGB(255, 138, 216, 35); // Dark violet
+    final Color selectedColor = Colors.greenAccent;
     final Color unselectedColor = Colors.white;
-    
+
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: isSelected ? selectedColor.withOpacity(0.2) : Colors.transparent,
+          border: Border.all(
+            color: isSelected ? selectedColor.withOpacity(0.5) : Colors.transparent,
+          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -157,12 +109,11 @@ class NavigationButton extends StatelessWidget {
                 size: 20,
                 color: isSelected ? selectedColor : unselectedColor,
               ),
-            if (text != null && icon != null)
-              const SizedBox(width: 4),
+            if (text != null && icon != null) const SizedBox(width: 4),
             if (text != null)
               Text(
                 text!,
-                style: TextStyle(
+                style: GoogleFonts.spaceMono(
                   fontSize: 12,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                   color: isSelected ? selectedColor : unselectedColor,
