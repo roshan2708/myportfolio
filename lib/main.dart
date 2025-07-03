@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myportfolio/screens/CVPage.dart';
 import 'package:myportfolio/screens/LandingPage.dart';
 import 'package:myportfolio/screens/SplashScreen.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => const SplashScreen()),
         GetPage(name: '/home', page: () => const LandingPage()),
-        GetPage(name: '/cv', page: () => const Center(child: Text('CV Page'))), // Placeholder for CV route
+        GetPage(name: '/cv', page: () => const CvPage()), // Placeholder for CV route
       ],
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,
