@@ -19,239 +19,245 @@ class LandingPage extends StatelessWidget {
     final NavigationController navController = Get.put(NavigationController());
 
     return Scaffold(
-      backgroundColor: AppColors.bgColor,
-      body: Stack(
-        children: [
-          // Constrain the scrollable area to prevent unbounded height
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: SingleChildScrollView(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double padding = constraints.maxWidth < 600 ? 16 : 55;
-                  return Column(
-                    children: [
-                      SizedBox(height: constraints.maxWidth < 600 ? 80 : 100),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: padding),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              key: SectionKeys.homeKey,
-                              child: const HeroSection(),
-                            ),
-                            Container(
-                              key: SectionKeys.skillsKey,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: padding),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Skills",
-                                      style: GoogleFonts.spaceMono(
-                                        color: Colors.greenAccent,
-                                        fontSize: constraints.maxWidth < 600 ? 32 : 50,
-                                        shadows: [
-                                          Shadow(
-                                            blurRadius: 10.0,
-                                            color: Colors.greenAccent.withOpacity(0.3),
-                                            offset: const Offset(0, 0),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    // Constrain the width of the SingleChildScrollView
-                                    SizedBox(
-                                      width: constraints.maxWidth,
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: const [
-                                            CustomSkillCard(
-                                              imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flutter_logo.svg/128px-Flutter_logo.svg.png?20230821075714",
-                                              text: "Flutter",
-                                              cardColor: AppColors.color1,
-                                            ),
-                                            CustomSkillCard(
-                                              imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
-                                              text: "Dart",
-                                              cardColor: AppColors.color2,
-                                            ),
-                                            CustomSkillCard(
-                                              imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1024px-Go_Logo_Blue.svg.png",
-                                              text: "GoLang",
-                                              cardColor: AppColors.color3,
-                                            ),
-                                            CustomSkillCard(
-                                              imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Firebase_icon.svg/240px-Firebase_icon.svg.png",
-                                              text: "Firebase",
-                                              cardColor: AppColors.color4,
-                                            ),
-                                            CustomSkillCard(
-                                              imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png",
-                                              text: "Python",
-                                              cardColor: AppColors.color5,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: AppColors.backgroundGradient,
+        ),
+        child: Stack(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    double padding = constraints.maxWidth < 600 ? 16 : 55;
+                    return Column(
+                      children: [
+                        SizedBox(height: constraints.maxWidth < 600 ? 80 : 100),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: padding),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                key: SectionKeys.homeKey,
+                                child: const HeroSection(),
+                              ),
+                              Container(
+                                key: SectionKeys.skillsKey,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: padding),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Skills",
+                                        style: GoogleFonts.spaceMono(
+                                          color: Colors.white,
+                                          fontSize: constraints.maxWidth < 600 ? 36 : 56,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1.5,
+                                          shadows: [
+                                            Shadow(
+                                              blurRadius: 15.0,
+                                              color: AppColors.neonGlow,
+                                              offset: const Offset(0, 0),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      const SizedBox(height: 20),
+                                      SizedBox(
+                                        width: constraints.maxWidth,
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: const [
+                                              CustomSkillCard(
+                                                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flutter_logo.svg/128px-Flutter_logo.svg.png?20230821075714",
+                                                text: "Flutter",
+                                                cardColor: AppColors.color1,
+                                              ),
+                                              CustomSkillCard(
+                                                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
+                                                text: "Dart",
+                                                cardColor: AppColors.color2,
+                                              ),
+                                              CustomSkillCard(
+                                                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1024px-Go_Logo_Blue.svg.png",
+                                                text: "GoLang",
+                                                cardColor: AppColors.color3,
+                                              ),
+                                              CustomSkillCard(
+                                                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Firebase_icon.svg/240px-Firebase_icon.svg.png",
+                                                text: "Firebase",
+                                                cardColor: AppColors.color4,
+                                              ),
+                                              CustomSkillCard(
+                                                imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png",
+                                                text: "Python",
+                                                cardColor: AppColors.color5,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Center(child: const CustomContainer()),
-                            Container(
-                              key: SectionKeys.technologiesKey,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),
-                                child: constraints.maxWidth < 600
-                                    ? Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Technologies\nI Use",
-                                            style: GoogleFonts.spaceMono(
-                                              color: Colors.greenAccent,
-                                              fontSize: constraints.maxWidth < 600 ? 32 : 50,
-                                              shadows: [
-                                                Shadow(
-                                                  blurRadius: 10.0,
-                                                  color: Colors.greenAccent.withOpacity(0.3),
-                                                  offset: const Offset(0, 0),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(height: 20),
-                                          // Constrain the width of the SingleChildScrollView
-                                          SizedBox(
-                                            width: constraints.maxWidth,
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Row(
-                                                children: const [
-                                                  InfoContainer(
-                                                    title: 'Front-end Engineer & Design',
-                                                    imageLocations: [
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flutter_logo.svg/128px-Flutter_logo.svg.png?20230821075714',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Firebase_icon.svg/240px-Firebase_icon.svg.png',
-                                                      'https://plugins.jetbrains.com/files/12129/612258/icon/default.png',
-                                                      'https://raw.githubusercontent.com/jonataslaw/getx/master/screenshots/getx-logo.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png',
-                                                      'https://upload.wikimedia.org/wikipedia/en/thumb/b/bb/Canva_Logo.svg/1280px-Canva_Logo.svg.png',
-                                                    ],
-                                                    technologies: [
-                                                      'Flutter',
-                                                      'Firebase',
-                                                      'Bloc',
-                                                      'GetX',
-                                                      'VS Code',
-                                                      'Figma',
-                                                      'Canva',
-                                                    ],
-                                                  ),
-                                                  SizedBox(width: 20),
-                                                  InfoContainer(
-                                                    title: 'Programming Languages',
-                                                    imageLocations: [
-                                                      'https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1024px-Go_Logo_Blue.svg.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png',
-                                                    ],
-                                                    technologies: [
-                                                      'Dart',
-                                                      'Go Lang',
-                                                      'Python',
-                                                      'JavaScript',
-                                                      'C',
-                                                      'C++',
-                                                    ],
+                              Center(child: const CustomContainer()),
+                              Container(
+                                key: SectionKeys.technologiesKey,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),
+                                  child: constraints.maxWidth < 600
+                                      ? Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Technologies\nI Use",
+                                              style: GoogleFonts.spaceMono(
+                                                color: Colors.white,
+                                                fontSize: constraints.maxWidth < 600 ? 36 : 56,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 1.5,
+                                                shadows: [
+                                                  Shadow(
+                                                    blurRadius: 15.0,
+                                                    color: AppColors.neonGlow,
+                                                    offset: const Offset(0, 0),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      )
-                                    : Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Technologies\nI Use",
-                                            style: GoogleFonts.spaceMono(
-                                              color: Colors.greenAccent,
-                                              fontSize: constraints.maxWidth < 600 ? 32 : 50,
-                                              shadows: [
-                                                Shadow(
-                                                  blurRadius: 10.0,
-                                                  color: Colors.greenAccent.withOpacity(0.3),
-                                                  offset: const Offset(0, 0),
+                                            const SizedBox(height: 20),
+                                            SizedBox(
+                                              width: constraints.maxWidth,
+                                              child: SingleChildScrollView(
+                                                scrollDirection: Axis.horizontal,
+                                                child: Row(
+                                                  children: const [
+                                                    InfoContainer(
+                                                      title: 'Front-end Engineer & Design',
+                                                      imageLocations: [
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flutter_logo.svg/128px-Flutter_logo.svg.png?20230821075714',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Firebase_icon.svg/240px-Firebase_icon.svg.png',
+                                                        'https://plugins.jetbrains.com/files/12129/612258/icon/default.png',
+                                                        'https://raw.githubusercontent.com/jonataslaw/getx/master/screenshots/getx-logo.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png',
+                                                        'https://upload.wikimedia.org/wikipedia/en/thumb/b/bb/Canva_Logo.svg/1280px-Canva_Logo.svg.png',
+                                                      ],
+                                                      technologies: [
+                                                        'Flutter',
+                                                        'Firebase',
+                                                        'Bloc',
+                                                        'GetX',
+                                                        'VS Code',
+                                                        'Figma',
+                                                        'Canva',
+                                                      ],
+                                                    ),
+                                                    SizedBox(width: 20),
+                                                    InfoContainer(
+                                                      title: 'Programming Languages',
+                                                      imageLocations: [
+                                                        'https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1024px-Go_Logo_Blue.svg.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png',
+                                                      ],
+                                                      technologies: [
+                                                        'Dart',
+                                                        'Go Lang',
+                                                        'Python',
+                                                        'JavaScript',
+                                                        'C',
+                                                        'C++',
+                                                      ],
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(width: 50),
-                                          Expanded(
-                                            child: SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Row(
-                                                children: const [
-                                                  InfoContainer(
-                                                    title: 'Front-end Engineer & Design',
-                                                    imageLocations: [
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flutter_logo.svg/128px-Flutter_logo.svg.png?20230821075714',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Firebase_icon.svg/240px-Firebase_icon.svg.png',
-                                                      'https://plugins.jetbrains.com/files/12129/612258/icon/default.png',
-                                                      'https://raw.githubusercontent.com/jonataslaw/getx/master/screenshots/getx-logo.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png',
-                                                      'https://upload.wikimedia.org/wikipedia/en/thumb/b/bb/Canva_Logo.svg/1280px-Canva_Logo.svg.png',
-                                                    ],
-                                                    technologies: [
-                                                      'Flutter',
-                                                      'Firebase',
-                                                      'Bloc',
-                                                      'GetX',
-                                                      'VS Code',
-                                                      'Figma',
-                                                      'Canva',
-                                                    ],
-                                                  ),
-                                                  SizedBox(width: 45),
-                                                  InfoContainer(
-                                                    title: 'Programming Languages',
-                                                    imageLocations: [
-                                                      'https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1024px-Go_Logo_Blue.svg.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png',
-                                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png',
-                                                    ],
-                                                    technologies: [
-                                                      'Dart',
-                                                      'Go Lang',
-                                                      'Python',
-                                                      'JavaScript',
-                                                      'C',
-                                                      'C++',
-                                                    ],
+                                          ],
+                                        )
+                                      : Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Technologies\nI Use",
+                                              style: GoogleFonts.spaceMono(
+                                                color: Colors.white,
+                                                fontSize: constraints.maxWidth < 600 ? 36 : 56,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: 1.5,
+                                                shadows: [
+                                                  Shadow(
+                                                    blurRadius: 15.0,
+                                                    color: AppColors.neonGlow,
+                                                    offset: const Offset(0, 0),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
+                                            const SizedBox(width: 50),
+                                            Expanded(
+                                              child: SingleChildScrollView(
+                                                scrollDirection: Axis.horizontal,
+                                                child: Row(
+                                                  children: const [
+                                                    InfoContainer(
+                                                      title: 'Front-end Engineer & Design',
+                                                      imageLocations: [
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flutter_logo.svg/128px-Flutter_logo.svg.png?20230821075714',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Firebase_icon.svg/240px-Firebase_icon.svg.png',
+                                                        'https://plugins.jetbrains.com/files/12129/612258/icon/default.png',
+                                                        'https://raw.githubusercontent.com/jonataslaw/getx/master/screenshots/getx-logo.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png',
+                                                        'https://upload.wikimedia.org/wikipedia/en/thumb/b/bb/Canva_Logo.svg/1280px-Canva_Logo.svg.png',
+                                                      ],
+                                                      technologies: [
+                                                        'Flutter',
+                                                        'Firebase',
+                                                        'Bloc',
+                                                        'GetX',
+                                                        'VS Code',
+                                                        'Figma',
+                                                        'Canva',
+                                                      ],
+                                                    ),
+                                                    SizedBox(width: 45),
+                                                    InfoContainer(
+                                                      title: 'Programming Languages',
+                                                      imageLocations: [
+                                                        'https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/1024px-Go_Logo_Blue.svg.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png',
+                                                        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1200px-ISO_C%2B%2B_Logo.svg.png',
+                                                      ],
+                                                      technologies: [
+                                                        'Dart',
+                                                        'Go Lang',
+                                                        'Python',
+                                                        'JavaScript',
+                                                        'C',
+                                                        'C++',
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                               ),
                             ),
                             Container(
@@ -265,12 +271,14 @@ class LandingPage extends StatelessWidget {
                                           Text(
                                             "Featured\nProjects",
                                             style: GoogleFonts.spaceMono(
-                                              color: Colors.greenAccent,
-                                              fontSize: constraints.maxWidth < 600 ? 32 : 50,
+                                              color: Colors.white,
+                                              fontSize: constraints.maxWidth < 600 ? 36 : 56,
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: 1.5,
                                               shadows: [
                                                 Shadow(
-                                                  blurRadius: 10.0,
-                                                  color: Colors.greenAccent.withOpacity(0.3),
+                                                  blurRadius: 15.0,
+                                                  color: AppColors.neonGlow,
                                                   offset: const Offset(0, 0),
                                                 ),
                                               ],
@@ -283,7 +291,7 @@ class LandingPage extends StatelessWidget {
                                               scrollDirection: Axis.horizontal,
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.start,
-                                                children: const [
+                                                children:  [
                                                   ProjectCard(
                                                     title: "Personalyze",
                                                     description: "An AI-powered personality analysis app using live camera & microphone input. Generates detailed reports and personality scores.",
@@ -316,12 +324,14 @@ class LandingPage extends StatelessWidget {
                                           Text(
                                             "Featured\nProjects",
                                             style: GoogleFonts.spaceMono(
-                                              color: Colors.greenAccent,
-                                              fontSize: constraints.maxWidth < 600 ? 32 : 50,
+                                              color: Colors.white,
+                                              fontSize: constraints.maxWidth < 600 ? 36 : 56,
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: 1.5,
                                               shadows: [
                                                 Shadow(
-                                                  blurRadius: 10.0,
-                                                  color: Colors.greenAccent.withOpacity(0.3),
+                                                  blurRadius: 15.0,
+                                                  color: AppColors.neonGlow,
                                                   offset: const Offset(0, 0),
                                                 ),
                                               ],
@@ -333,7 +343,7 @@ class LandingPage extends StatelessWidget {
                                               scrollDirection: Axis.horizontal,
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.start,
-                                                children:  [
+                                                children: const [
                                                   ProjectCard(
                                                     title: "Personalyze",
                                                     description: "An AI-powered personality analysis app using live camera & microphone input. Generates detailed reports and personality scores.",
@@ -382,12 +392,21 @@ class LandingPage extends StatelessWidget {
             right: 0,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width < 600 ? 16 : 55),
-              color: AppColors.bgColor,
+              decoration: BoxDecoration(
+                gradient: AppColors.navGradient,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.neonGlow.withOpacity(0.3),
+                    blurRadius: 10,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
               child: const NavigationWidget(),
             ),
           ),
         ],
       ),
-    );
+    ));
   }
 }
