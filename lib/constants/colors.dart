@@ -1,11 +1,10 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
-class AppColors{
-  
-  static const Color bgColor = Color(0xFF0C0C0D);
-  static const Color color1 = Color(0xFF57B4BA);
-  static const Color color2 = Color(0xFFD76C82);
-  static const Color color3 = Color(0xFF6A9C89);
-  static const Color color4 = Color(0xFF015551);
-  static const Color color5 = Color(0xFFE07A5F);
+class AppColors {
+  static const Color bgColor = Color(0xFF121212); // Dark background for hacker aesthetic
+  static const Color color1 = Color(0xFF1E88E5); // Blue for Flutter
+  static const Color color2 = Color(0xFF00C4B4); // Teal for Dart
+  static const Color color3 = Color(0xFF0288D1); // Light blue for GoLang
+  static const Color color4 = Color(0xFFFFCA28); // Yellow for Firebase
+  static const Color color5 = Color(0xFF43A047); // Green for Python
 }
